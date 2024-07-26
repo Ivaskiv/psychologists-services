@@ -5,24 +5,30 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from '../../firebase/firebaseConfig';
+import { auth, signInWithCustomToken } from '../../firebase/firebaseConfig';
+import axios from 'axios';
 
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
-    console.log('Attempting login with:', email, password); // Логування спроби логіну
+    console.log('Attempting login with:', email, password);
     if (!email || !password) {
       return rejectWithValue('Email and password are required');
     }
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('Login successful:', userCredential.user); // Логування успішного логіну
+      const response = await axios.post('http://localhost:3000/login', { email, password });
+      const { token } = response.data;
+      await signInWithCustomToken(auth, token);
+      const user = auth.currentUser;
+
+      console.log('Login successful:', user);
       return {
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
       };
     } catch (error) {
-      console.error('Login error:', error.message); // Логування помилки
+      console.error('Login error:', error.message);
       return rejectWithValue(error.message);
     }
   }
