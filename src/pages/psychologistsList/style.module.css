@@ -1,0 +1,22 @@
+@import '../../index.css';
+
+.psychologists_list {
+  margin-top: 100px;
+  padding: 170px 128px 100px 128px;
+}
+
+.load_more_button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.load_more_button:hover {
+  background-color: #0056b3;
+}

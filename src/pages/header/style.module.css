@@ -1,0 +1,117 @@
+@import '../../index.css';
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 1184px;
+  height: 96px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 24px 128px;
+  background: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(25, 26, 21, 0.1);
+  z-index: 100;
+}
+
+.logo {
+  flex: none;
+  font-size: 24px;
+  font-weight: bold;
+
+  font-family: var(--font-inter-bold);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+}
+
+.logo span {
+  color: var(--color-green);
+}
+
+.nav_menu {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-inter-regular);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+
+  color: var(--color-text);
+}
+
+.nav_menu a {
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+}
+
+.nav_menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--color-green);
+  transition: width 0.3s ease;
+}
+
+.nav_menu a.active::after {
+  width: 8px;
+  height: 8px;
+}
+.auth_buttons {
+  display: flex;
+  gap: 20px;
+}
+.auth_button_user,
+.auth_button_login,
+.auth_button_logout,
+.auth_button_registration {
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 14px 39px;
+  border: 1px solid rgba(25, 26, 21, 0.2);
+  border-radius: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  background: transparent; /* Без заливки за замовчуванням */
+}
+.auth_button_user {
+  border: none;
+}
+.avatar {
+}
+/* Стиль для кнопки при наведенні */
+.auth_button_login:hover,
+.auth_button_logout:hover,
+.auth_button_registration:hover,
+.auth_button_login:focus,
+.auth_button_logout:focus,
+.auth_button_registration:focus,
+.auth_button_login.active,
+.auth_button_logout.active,
+.auth_button_registration.active {
+  background: var(--color-green); /* Зелена заливка при наведенні, фокусі та активному стані */
+  border: none; /* При ховері або активності бордер зникає */
+  color: var(--color-white); /* Колір тексту при наведенні, фокусі або активності */
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+}
