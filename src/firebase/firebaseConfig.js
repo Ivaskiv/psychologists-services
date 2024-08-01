@@ -1,14 +1,12 @@
-// firebaseConfig.js
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -19,13 +17,8 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
-console.log('API Key:', import.meta.env.VITE_FIREBASE_API_KEY);
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
 const auth = getAuth(app);
-
-// Отримання бази даних
-const db = getDatabase(app);
-export { auth, db, signInWithCustomToken };
+const db = getDatabase();
+export { auth, db, createUserWithEmailAndPassword, signOut, onAuthStateChanged };

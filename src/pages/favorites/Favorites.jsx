@@ -1,19 +1,18 @@
+import React from 'react';
+import PsychologistCard from '../../components/Psychologists/PsychologistsCard';
+import { selectFavoritePsychologists } from '../../redux/psychologitsts/psychologistsSelector';
 import css from './style.module.css';
 import { useSelector } from 'react-redux';
-import PsychologistCard from '../../components/psychologistCard/psychologistCard.jsx';
 
 const Favorites = () => {
-  const favorites = useSelector(state => {
-    const { favoriteIds, list } = state.psychologists;
-    return list.filter(psychologist => favoriteIds.includes(psychologist._id));
-  });
+  const favoritePsychologists = useSelector(selectFavoritePsychologists);
 
   return (
     <div className={css.favorites_page}>
-      {favorites.length > 0 ? (
+      {favoritePsychologists.length > 0 ? (
         <div className={css.psychologists_list}>
-          {favorites.map(psychologist => (
-            <PsychologistCard key={psychologist.id} />
+          {favoritePsychologists.map(psychologist => (
+            <PsychologistCard key={psychologist.id} psychologist={psychologist} />
           ))}
         </div>
       ) : (

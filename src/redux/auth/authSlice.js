@@ -18,20 +18,41 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(register.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
       .addCase(register.fulfilled, (state, action) => {
-        console.log('User registered in Redux:', action.payload); // Логування даних користувача
         state.user = action.payload;
         state.status = 'succeeded';
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
+      })
+      .addCase(login.pending, state => {
+        state.status = 'loading';
+        state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log('User logged in Redux:', action.payload); // Логування даних користувача
         state.user = action.payload;
         state.status = 'succeeded';
       })
+      .addCase(login.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
+      })
+      .addCase(logout.pending, state => {
+        state.status = 'loading';
+        state.error = null;
+      })
       .addCase(logout.fulfilled, state => {
-        console.log('User logged out from Redux'); // Логування при виході
         state.user = null;
         state.status = 'idle';
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.error = action.payload;
+        state.status = 'failed';
       });
   },
 });

@@ -1,11 +1,15 @@
+@import 'modern-normalize/modern-normalize.css';
 /* index.css */
 
 :root {
   --color-white: #fff;
+  --color-bg-body: #f3f3f3;
   --color-text: #191a15;
+  --color-text-grey: #8a8a89;
   --color-text-light-grey: rgba(25, 26, 21, 0.5);
   --color-green: #54be96;
   --color-green-hover: #36a379;
+  --color-text-green: #38cd3e;
   --color-light-green-background: rgba(84, 190, 150, 0.2);
   --color-icon-bg-text: #fbfbfb;
   --color-icon-text: rgba(251, 251, 251, 0.5);
@@ -20,8 +24,6 @@
   --font-inter-semibold: 'Inter-SemiBold', sans-serif;
   --font-inter-semibold-italic: 'Inter-SemiBoldItalic', sans-serif;
 }
-
-@import 'modern-normalize/modern-normalize.css';
 
 @font-face {
   font-family: 'Inter-Bold';
@@ -60,9 +62,19 @@ body {
   display: flex;
   flex-direction: column;
   color: var(--color-main);
+  background: var(--color-bg-body);
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* h2 {
   font-family: var(--font-inter-medium);
   font-weight: 500;
   font-size: 40px;
@@ -70,8 +82,7 @@ h1 {
   letter-spacing: -0.02em;
   font-style: normal;
   color: var(--color-text);
-}
-
+} */
 p {
   margin: 0;
   padding: 0;
@@ -81,13 +92,10 @@ p {
 
 button {
   border: none;
-  padding: 10px 12px;
   cursor: pointer;
-  font-family: inherit;
-  font-size: 16px;
 }
 
-button:focus,
+/* button:focus,
 button:focus-visible {
   outline: none;
-}
+} */

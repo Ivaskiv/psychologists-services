@@ -4,14 +4,15 @@ import ReactDOM from 'react-dom';
 import RegistrationForm from '../ModalForm/RegistrationForm.jsx';
 import LoginForm from '../ModalForm/LoginForm.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from '../../../redux/auth/authSlice.js';
-import { logout } from '../../../redux/auth/authOperation.js';
+import { selectUser, clearUser } from '../../../redux/auth/authSlice';
+import { logout } from '../../../redux/auth/authOperation';
 
 const ModalAuth = ({ isOpen, onClose, type }) => {
   const [isRegister, setIsRegister] = useState(type === 'register');
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
+  // Перевірка аутентифікації
   const authenticated = Boolean(user && user.uid);
 
   useEffect(() => {
@@ -33,7 +34,13 @@ const ModalAuth = ({ isOpen, onClose, type }) => {
   }, [type]);
 
   const handleLogout = async () => {
-    dispatch(logout());
+    try {
+      await dispatch(logout()).unwrap();
+      dispatch(clearUser()); // Очищення користувача при виході
+      alert('User logged out');
+    } catch (error) {
+      alert(error.message);
+    }
     onClose();
   };
 

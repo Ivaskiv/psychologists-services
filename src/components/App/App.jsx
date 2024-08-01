@@ -8,7 +8,7 @@ import { fetchPsychologists } from '../../redux/psychologitsts/psychologistsOper
 
 const Home = lazy(() => import('../../pages/home/Home.jsx'));
 const Header = lazy(() => import('../../pages/header/Header.jsx'));
-const Psychologists = lazy(() => import('../../pages/psychologistsList/PsychologistsList.jsx'));
+const PsychologistsList = lazy(() => import('../Psychologists/PsychologistsList.jsx'));
 const Favorites = lazy(() => import('../../pages/favorites/Favorites.jsx'));
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route index path="/" element={<Home />} />
-        <Route path="/psychologists" element={<Psychologists />} />
+        <Route path="/psychologists" element={<PsychologistsList />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={1000} hideProgressBar={true} theme="light" />

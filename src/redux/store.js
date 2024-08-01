@@ -1,6 +1,8 @@
-// src/redux/store.js
-
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import authReducer from './auth/authSlice';
+import psychologistsReducer from './psychologitsts/psychologistsSlice';
+import favoritesReducer from './psychologitsts/psychologistsSlice';
+
 import {
   persistStore,
   persistReducer,
@@ -12,13 +14,18 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import authReducer from './auth/authSlice';
-import { psychologistsReducer } from './psychologitsts/psychologistsSlice';
-import favoritesReducer from './favorites/favoritesSlice';
+import { thunk } from 'redux-thunk'; // Імпорт thunk без default
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['auth'], // Тільки auth зберігається
+};
+
 const favoritesConfig = {
   key: 'favorites',
   storage,
-  whitelist: ['items'],
+  whitelist: ['favoriteIds'],
 };
 
 const rootReducer = combineReducers({
@@ -27,14 +34,16 @@ const rootReducer = combineReducers({
   favorites: persistReducer(favoritesConfig, favoritesReducer),
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(thunk),
 });
 
 export const persistor = persistStore(store);

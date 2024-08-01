@@ -34,7 +34,7 @@ const Header = () => {
   }, [user]);
 
   return (
-    <>
+    <div className={css.header_container}>
       <header className={css.header}>
         <div className={css.logo}>
           <span>psychologists.</span>services
@@ -61,7 +61,7 @@ const Header = () => {
                   src={
                     user?.photoURL
                       ? user.photoURL
-                      : `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="${css.icon}"><use href="${sprite}#icon_users"/></svg>`
+                      : `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="${css.icon}"><use href="${sprite}#icon_avatar"/></svg>`
                   }
                   alt=""
                   className={css.avatar}
@@ -88,7 +88,7 @@ const Header = () => {
         </div>
       </header>
       <ModalAuth isOpen={modalState !== null} onClose={closeModal} type={modalState} />
-    </>
+    </div>
   );
 };
 

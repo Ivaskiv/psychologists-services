@@ -1,0 +1,265 @@
+/* style.module.css */
+
+/* Загальні стилі для модального вікна */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container_form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fbfbfb;
+  padding: 64px;
+  border-radius: 30px;
+  z-index: 1001;
+  width: 100%;
+  max-width: 600px;
+  max-height: 860px;
+}
+
+/* Заголовок форми */
+.form_title {
+  margin-bottom: 20px;
+}
+
+.form_title h3 {
+  font-family: var(--font-inter-medium);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.2em;
+  letter-spacing: -0.02em;
+  color: #191a15;
+  margin-bottom: 20px;
+}
+
+.form_title p {
+  font-family: var(--font-inter-regular);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25em;
+  color: rgba(25, 26, 21, 0.5);
+  text-align: justify;
+}
+
+/* Інформація про психолога */
+.psychologist_modal_avatar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.avatar_img {
+  border-radius: 15px;
+  margin-right: 10px;
+  width: 44px;
+  height: 44px;
+}
+
+/* Стилі для контейнера підпису */
+.subtitle_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.5em;
+  display: flex;
+  align-items: center;
+  color: #8a8a89;
+}
+
+.headerText {
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5em;
+  display: flex;
+  align-items: center;
+  color: #191a15;
+}
+
+/* Поля форми */
+.fields_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Стилі для помилок */
+.error_message {
+  color: red;
+  margin-top: -14px;
+  padding-left: 16px;
+  font-size: 10px;
+}
+
+.field,
+.textarea,
+.time_picker {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 18px;
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+  width: 472px;
+  height: 52px;
+}
+
+.react-datepicker-popper {
+  position: absolute;
+  z-index: 1001;
+  left: 0;
+  top: 100%;
+  width: 100%;
+}
+
+.phone_input {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 16px 0 16px 16px;
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+  width: 472px;
+  height: 52px;
+  width: 50%;
+}
+
+.phone_input input {
+  padding-left: 6px;
+  border: none;
+}
+
+/* Контейнер для полів телефону і вибору часу */
+.field_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+}
+
+/* Input field for DatePicker */
+.time_picker {
+  position: relative;
+  padding-right: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(25, 26, 21, 0.1);
+  border-radius: 12px;
+}
+
+.date_picker_wrapper {
+  width: 50%;
+}
+
+/* Style for the react-datepicker calendar */
+.react-datepicker {
+  width: 100%;
+}
+
+/* Ensure the calendar does not overflow */
+.react-datepicker__triangle {
+  display: none; /* Hide the triangle if not needed */
+}
+
+.clock_icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  font-size: 20px;
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  z-index: 1003;
+}
+
+/* Текстова область */
+.textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Кнопка закриття модального вікна */
+.closeButton {
+  font-size: 2rem;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1003;
+}
+
+.closeButton:hover {
+  color: red;
+  transform: scale(1.1);
+}
+
+.closeButton:focus {
+  outline: none;
+}
+
+/* Кнопка відправки */
+.btn_submit_container {
+  text-align: right;
+}
+
+.btn_submit {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn_submit:hover {
+  background-color: #0056b3;
+}
+
+.btn_send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: #fbfbfb;
+  width: 472px;
+  height: 52px;
+  background: #54be96;
+  border-radius: 30px;
+}

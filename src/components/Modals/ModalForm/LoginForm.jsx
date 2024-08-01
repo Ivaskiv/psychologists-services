@@ -1,10 +1,10 @@
 import css from './style.module.css';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../redux/auth/authOperation';
 
@@ -18,6 +18,7 @@ const schema = yup.object().shape({
 
 const LoginForm = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
 
   const {
@@ -28,15 +29,15 @@ const LoginForm = ({ onClose }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async data => {
-    console.log('Form Data:', data); // Логування даних форми для перевірки
-
+  const handleLogin = async data => {
+    const { email, password } = data;
     try {
-      // await signInWithEmailAndPassword(auth, data.email, data.password);
-      await dispatch(login(data)).unwrap();
-      onClose();
+      await dispatch(login({ email, password })).unwrap();
+      console.log('Login successful');
+      if (onClose) onClose();
     } catch (error) {
-      console.error('Login failed', error.message);
+      console.error('Login failed:', error.message);
+      setError('Login failed: ' + error.message);
     }
   };
 
@@ -45,7 +46,7 @@ const LoginForm = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <h2>Login</h2>
       <div className={css.text_form}>
         Welcome back! Please enter your credentials to access your account and continue your search
@@ -76,9 +77,10 @@ const LoginForm = ({ onClose }) => {
           {errors.password && <p className={css.validation_error}>{errors.password.message}</p>}
         </label>
       </div>
-      <button type="submit" className={css.button_login} onClick={onSubmit}>
+      <button type="submit" className={css.button_login}>
         Login
       </button>
+      {error && <p className={css.validation_error}>{error}</p>} {/* Відображення помилок */}
     </form>
   );
 };

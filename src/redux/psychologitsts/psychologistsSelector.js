@@ -1,43 +1,22 @@
 import { createSelector } from 'reselect';
 
-// отримати список з Redux
-export const selectPsychologistsState = state => state.psychologists;
+export const selectPsychologists = state => state.psychologists.data;
 
-// Селектор для отримання списку психологів
-export const selectPsychologists = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => psychologistsState.items || []
-);
+export const selectCurrentPage = state => state.psychologists.currentPage;
 
-// Селектор для отримання статусу запиту
-export const selectPsychologistsStatus = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => psychologistsState.status
-);
+export const selectItemsPerPage = state => state.psychologists.itemsPerPage;
 
-// Селектор для отримання помилок
-export const selectPsychologistsError = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => psychologistsState.error
-);
+export const selectFilter = state => state.psychologists.filter;
 
-// Селектор для отримання поточної сторінки
-export const selectCurrentPage = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => psychologistsState.currentPage
-);
+export const selectTotalPages = state => state.psychologists.totalPages;
 
-// Селектор для отримання кількості психологів
-export const selectTotalCount = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => psychologistsState.totalCount
-);
+// Основний селектор для отримання всіх психологів
+const selectAllPsychologists = state => state.psychologists.data;
 
-// Селектор для перевірки, чи є ще психологи для завантаження
-export const selectHasMorePsychologists = createSelector(
-  [selectPsychologistsState],
-  psychologistsState => {
-    const items = psychologistsState.items || [];
-    return items.length < psychologistsState.totalCount;
+// Мемоїзований селектор для отримання улюблених психологів
+export const selectFavoritePsychologists = createSelector(
+  [selectAllPsychologists, state => state.psychologists.favoriteIds],
+  (psychologists, favoriteIds) => {
+    return psychologists.filter(psychologist => favoriteIds.includes(psychologist.id));
   }
 );

@@ -1,20 +1,43 @@
-import { onValue, ref } from 'firebase/database';
-import { setPsychologists } from './psychologistsSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ref, get } from 'firebase/database'; // Використовуйте get замість onValue для одноразового отримання даних
 import { db } from '../../firebase/firebaseConfig';
+import { setPsychologists } from './psychologistsSlice';
 
-export const fetchPsychologists = () => dispatch => {
-  const psychologistsRef = ref(db, 'path/to/psychologists'); // Вкажіть правильний шлях до даних
-  const unsubscribe = onValue(psychologistsRef, snapshot => {
-    const data = snapshot.val();
-    const psychologistsArray = data ? Object.values(data) : [];
-    const psychologistsWithId = psychologistsArray.map(psychologist => ({
-      ...psychologist,
-      id: psychologist.name,
-    }));
+// Використовуємо createAsyncThunk для створення асинхронного запиту
+export const fetchPsychologists = createAsyncThunk(
+  'psychologists/fetchPsychologists',
+  async (page = 1, { dispatch, getState }) => {
+    const { filter } = getState().psychologists;
+    const dataRef = ref(db, '/');
 
-    dispatch(setPsychologists(psychologistsWithId));
-  });
-  return () => {
-    unsubscribe();
-  };
-};
+    try {
+      const snapshot = await get(dataRef);
+
+      if (!snapshot.exists()) {
+        return [];
+      }
+
+      const data = snapshot.val();
+
+      if (!data || typeof data !== 'object') {
+        return [];
+      }
+
+      // Формуємо масив психологів з унікальними id
+      const psychologistsArray = Object.entries(data).map(([key, value]) => ({
+        ...value,
+        id: key, // Використовуємо ключ як унікальний id
+      }));
+
+      // Застосовуємо фільтр
+      const filteredPsychologists = psychologistsArray.filter(psychologist => {
+        return filter === ' ' || psychologist.someField === filter;
+      });
+
+      return filteredPsychologists;
+    } catch (error) {
+      console.error('Error fetching psychologists:', error);
+      throw error;
+    }
+  }
+);
