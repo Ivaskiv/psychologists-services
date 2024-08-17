@@ -12,7 +12,6 @@ import { GoClock } from 'react-icons/go';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './style.module.css';
 
-// Схема валідації з Yup
 const formSchema = yup.object({
   name: yup.string().required('Name is required'),
   tel: yup
@@ -83,6 +82,8 @@ const ModalMakeAnAppointment = ({ isOpen, onClose, onSubmit, psychologist }) => 
     console.log('Form Data:', formattedData);
     reset();
     onSubmit(formattedData);
+
+    onClose();
   };
 
   const handlePhoneChange = value => {
@@ -133,7 +134,7 @@ const ModalMakeAnAppointment = ({ isOpen, onClose, onSubmit, psychologist }) => 
             <p className={css.error_message}>{errors.name?.message}</p>
             <input className={css.field} {...register('email')} type="email" placeholder="Email" />
             <p className={css.error_message}>{errors.email?.message}</p>
-            <div className={css.field_container}>
+            <div className={css.container_phone_date}>
               <PhoneInput
                 international
                 {...register('tel')}

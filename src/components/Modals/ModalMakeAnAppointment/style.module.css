@@ -1,6 +1,5 @@
 /* style.module.css */
 
-/* Загальні стилі для модального вікна */
 .modal {
   position: fixed;
   top: 0;
@@ -11,6 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
   z-index: 1000;
 }
 
@@ -25,57 +25,52 @@
 .container_form {
   position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   background: #fbfbfb;
-  padding: 64px;
-  border-radius: 30px;
+  padding: 24px;
+  border-radius: 8px;
   z-index: 1001;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 600px;
-  max-height: 860px;
-}
-
-/* Заголовок форми */
-.form_title {
-  margin-bottom: 20px;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .form_title h3 {
   font-family: var(--font-inter-medium);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 40px;
+  font-size: 16px;
   line-height: 1.2em;
+  font-weight: 500;
   letter-spacing: -0.02em;
   color: #191a15;
-  margin-bottom: 20px;
+  margin-top: 24px;
+  margin-bottom: 16px;
 }
 
 .form_title p {
   font-family: var(--font-inter-regular);
-  font-weight: 400;
-  font-size: 16px;
+  font-size: 10px;
   line-height: 1.25em;
   color: rgba(25, 26, 21, 0.5);
-  text-align: justify;
+  text-align: justify-content;
+  padding-bottom: 20px;
 }
 
-/* Інформація про психолога */
 .psychologist_modal_avatar {
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .avatar_img {
   border-radius: 15px;
   margin-right: 10px;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
 }
 
-/* Стилі для контейнера підпису */
 .subtitle_container {
   display: flex;
   flex-direction: column;
@@ -84,144 +79,110 @@
 .subtitle {
   font-family: 'Inter';
   font-weight: 500;
-  font-size: 12px;
-  line-height: 1.5em;
-  display: flex;
-  align-items: center;
+  font-size: 10px;
   color: #8a8a89;
 }
 
 .headerText {
   font-family: 'Inter';
   font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5em;
-  display: flex;
-  align-items: center;
+  font-size: 14px;
   color: #191a15;
 }
 
-/* Поля форми */
 .fields_container {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-/* Стилі для помилок */
 .error_message {
   color: red;
-  margin-top: -14px;
-  padding-left: 16px;
   font-size: 10px;
+  margin-top: -12px;
+  padding-left: 8px;
 }
 
 .field,
 .textarea,
+.phone_input,
 .time_picker {
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  gap: 18px;
+  padding: 12px;
   border: 1px solid rgba(25, 26, 21, 0.1);
-  border-radius: 12px;
-  width: 472px;
-  height: 52px;
-}
-
-.react-datepicker-popper {
-  position: absolute;
-  z-index: 1001;
-  left: 0;
-  top: 100%;
+  border-radius: 8px;
   width: 100%;
 }
 
-.phone_input {
+.phone_input,
+.date_picker_wrapper {
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  padding: 16px 0 16px 16px;
+  padding: 12px;
   border: 1px solid rgba(25, 26, 21, 0.1);
-  border-radius: 12px;
-  width: 472px;
-  height: 52px;
-  width: 50%;
+  border-radius: 8px;
+  width: 100%;
 }
 
 .phone_input input {
-  padding-left: 6px;
+  padding: 0;
   border: none;
+  background: transparent;
 }
 
-/* Контейнер для полів телефону і вибору часу */
-.field_container {
+.container_phone_date {
   display: flex;
-  justify-content: space-between;
-  gap: 18px;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
-}
-
-/* Input field for DatePicker */
-.time_picker {
-  position: relative;
-  padding-right: 40px;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid rgba(25, 26, 21, 0.1);
-  border-radius: 12px;
 }
 
 .date_picker_wrapper {
-  width: 50%;
+  position: relative;
 }
 
-/* Style for the react-datepicker calendar */
-.react-datepicker {
-  width: 100%;
+.time_picker {
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
-/* Ensure the calendar does not overflow */
 .react-datepicker__triangle {
-  display: none; /* Hide the triangle if not needed */
+  display: none;
 }
 
 .clock_icon {
   position: absolute;
-  right: 16px;
+  right: 12px;
   top: 50%;
-  font-size: 20px;
+  transform: translateY(-50%);
+  font-size: 18px;
   pointer-events: none;
-  width: 20px;
-  height: 20px;
   z-index: 1003;
 }
 
-/* Текстова область */
+.react-datepicker-wrapper input:focus,
+.react-datepicker-wrapper input:hover {
+  outline: none;
+  box-shadow: none;
+}
+
 .textarea {
-  height: 100px;
+  height: 80px;
   resize: vertical;
 }
 
-/* Кнопка закриття модального вікна */
 .closeButton {
-  font-size: 2rem;
-  width: 32px;
-  height: 32px;
+  font-size: 1.5rem;
+  width: 28px;
+  height: 28px;
   background: none;
   border: none;
   color: #333;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1003;
+  top: 16px;
+  right: 16px;
 }
 
 .closeButton:hover {
@@ -233,23 +194,9 @@
   outline: none;
 }
 
-/* Кнопка відправки */
 .btn_submit_container {
-  text-align: right;
-}
-
-.btn_submit {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn_submit:hover {
-  background-color: #0056b3;
+  text-align: center;
+  margin-top: 16px;
 }
 
 .btn_send {
@@ -258,8 +205,180 @@
   align-items: center;
   gap: 8px;
   color: #fbfbfb;
-  width: 472px;
-  height: 52px;
+  height: 44px;
   background: #54be96;
   border-radius: 30px;
+  width: 100%;
+}
+
+.btn_send:hover,
+.btn_send:active {
+  background: var(--color-green-hover);
+}
+
+input:focus,
+input:hover,
+textarea:focus,
+textarea:hover,
+select:focus,
+select:hover,
+button:focus,
+button:hover {
+  outline: none;
+  box-shadow: none;
+}
+
+.field:focus,
+.field:hover,
+.textarea:focus,
+.textarea:hover,
+.phone_input:focus,
+.phone_input:hover,
+.time_picker:focus,
+.time_picker:hover,
+.date_picker_wrapper input:focus,
+.date_picker_wrapper input:hover {
+  outline: none;
+  box-shadow: none;
+  border-color: rgba(25, 26, 21, 0.1);
+}
+
+.body_no_scroll {
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .fields_container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .container_phone_date {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .phone_input,
+  .date_picker_wrapper {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 52px;
+  }
+
+  .date_picker_wrapper {
+    margin-left: 8px;
+  }
+
+  .container_form {
+    padding: 32px;
+    border-radius: 12px;
+    max-width: 480px;
+  }
+
+  .form_title h3 {
+    font-size: 28px;
+  }
+
+  .form_title p {
+    font-size: 16px;
+  }
+
+  .avatar_img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .headerText {
+    font-size: 16px;
+  }
+
+  .field,
+  .phone_input,
+  .textarea,
+  .time_picker {
+    height: 48px;
+  }
+
+  .time_picker {
+    width: 100%;
+    height: 48px;
+  }
+
+  .text_area {
+    height: 100px;
+  }
+
+  .clock_icon {
+    font-size: 22px;
+  }
+
+  .btn_send {
+    height: 48px;
+  }
+
+  .fields_container {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container_form {
+    padding: 40px;
+    max-width: 600px;
+
+    overflow: auto; /* або overflow-y: auto; */
+    scrollbar-width: none; /* Для Firefox */
+    -ms-overflow-style: none; /* Для IE та Edge */
+  }
+
+  .container_form::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari, Opera */
+  }
+
+  .form_title h3 {
+    font-size: 40px;
+  }
+
+  .form_title p {
+    font-size: 18px;
+  }
+
+  .avatar_img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .headerText {
+    font-size: 18px;
+  }
+
+  .field,
+  .textarea,
+  .container_phone_date {
+    height: 52px;
+  }
+
+  .text_area {
+    height: 120px;
+  }
+
+  .clock_icon {
+    font-size: 24px;
+  }
+
+  .btn_send {
+    height: 52px;
+  }
 }

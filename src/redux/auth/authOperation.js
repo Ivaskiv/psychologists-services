@@ -7,14 +7,14 @@ import {
   signInWithCustomToken,
 } from 'firebase/auth';
 import axios from 'axios';
-import { auth } from '../../firebase/firebaseConfig';
+import { auth } from '../../firebaseConfig';
 
 // дія для входу в систему
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      // Використовуємо Firebase для входу
+      // Firebase для входу
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 

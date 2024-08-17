@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
 import psychologistsReducer from './psychologitsts/psychologistsSlice';
-import favoritesReducer from './psychologitsts/psychologistsSlice';
 
 import {
   persistStore,
@@ -14,24 +13,23 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { thunk } from 'redux-thunk'; // Імпорт thunk без default
+import { thunk } from 'redux-thunk';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'], // Тільки auth зберігається
+  whitelist: ['auth'],
 };
 
-const favoritesConfig = {
-  key: 'favorites',
+const psychologistsPersistConfig = {
+  key: 'filters',
   storage,
-  whitelist: ['favoriteIds'],
+  whitelist: ['filters'],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  psychologists: psychologistsReducer,
-  favorites: persistReducer(favoritesConfig, favoritesReducer),
+  psychologists: persistReducer(psychologistsPersistConfig, psychologistsReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

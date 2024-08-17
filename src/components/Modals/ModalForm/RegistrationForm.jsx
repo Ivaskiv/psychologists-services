@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 // import { useDispatch } from 'react-redux';
 // import { registerUser } from '../../../redux/auth/authOperation';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../../firebase/firebaseConfig';
+import { auth } from '../../../firebaseConfig';
 
 const schema = yup.object().shape({
   name: yup

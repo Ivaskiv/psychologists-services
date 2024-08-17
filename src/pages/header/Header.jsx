@@ -57,15 +57,9 @@ const Header = () => {
           {authenticated ? (
             <div className={css.user_info}>
               <button className={css.auth_button_user}>
-                <img
-                  src={
-                    user?.photoURL
-                      ? user.photoURL
-                      : `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" class="${css.icon}"><use href="${sprite}#icon_avatar"/></svg>`
-                  }
-                  alt=""
-                  className={css.avatar}
-                />
+                <svg className={css.avatar}>
+                  <use href={`${sprite}#icon-avatar`} />
+                </svg>
                 <div className={css.user_name}>{user.displayName || 'User'}</div>
               </button>
               <button className={css.auth_button_logout} onClick={handleLogout}>

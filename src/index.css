@@ -3,8 +3,8 @@
 
 :root {
   --color-white: #fff;
-  --color-bg-body: #f3f3f3;
   --color-text: #191a15;
+  --color-bg-body: #f3f3f3;
   --color-text-grey: #8a8a89;
   --color-text-light-grey: rgba(25, 26, 21, 0.5);
   --color-green: #54be96;
@@ -23,6 +23,10 @@
   --font-inter-regular: 'Inter-Regular', sans-serif;
   --font-inter-semibold: 'Inter-SemiBold', sans-serif;
   --font-inter-semibold-italic: 'Inter-SemiBoldItalic', sans-serif;
+
+  --font-size-small: 14px;
+  --font-size-medium: 16px;
+  --font-size-large: 20px;
 }
 
 @font-face {
@@ -56,12 +60,9 @@ body {
   background-repeat: no-repeat;
   font-weight: 400;
   font-style: normal;
-  /* width: 100%; */
-  margin: 0;
+
   position: relative;
-  display: flex;
-  flex-direction: column;
-  color: var(--color-main);
+  color: var(--color-text);
   background: var(--color-bg-body);
 }
 
@@ -74,15 +75,6 @@ p {
   margin-top: 0;
 }
 
-/* h2 {
-  font-family: var(--font-inter-medium);
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 48px;
-  letter-spacing: -0.02em;
-  font-style: normal;
-  color: var(--color-text);
-} */
 p {
   margin: 0;
   padding: 0;
@@ -94,8 +86,3 @@ button {
   border: none;
   cursor: pointer;
 }
-
-/* button:focus,
-button:focus-visible {
-  outline: none;
-} */

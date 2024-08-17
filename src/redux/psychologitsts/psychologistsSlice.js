@@ -1,67 +1,96 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPsychologists } from './psychologistsOperation';
+import {
+  addFavoritesPsychologists,
+  fetchAllPsychologists,
+  fetchUserFavorites,
+  removeFavoritePsychologist,
+} from './psychologistsOperation.js';
 
 const psychologistsSlice = createSlice({
   name: 'psychologists',
   initialState: {
     data: [],
-    favoriteIds: [],
+    totalPsychologistsCount: 0,
     currentPage: 1,
-    totalPages: 1,
-    filter: ' ',
-    status: 'idle', // Додаємо статус для асинхронних запитів
+    itemsPerPage: 3,
+    filter: '',
+    sortType: 'A to Z',
+    hasMore: true,
+    status: 'idle',
     error: null,
+    favoriteIds: [],
   },
   reducers: {
     setPage: (state, action) => {
-      state.currentPage = action.payload ?? state.currentPage + 1;
+      state.currentPage = action.payload;
     },
-    setTotalPages: (state, action) => {
-      state.totalPages = action.payload;
-    },
-    resetState: state => {
-      state.data = [];
-      state.currentPage = 1;
-      state.totalPages = 1;
-      state.filter = ' ';
-      state.status = 'idle';
-      state.error = null;
+    setItemsPerPage: (state, action) => {
+      state.itemsPerPage = action.payload;
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
+      state.currentPage = 1;
+    },
+    setSortType: (state, action) => {
+      state.sortType = action.payload;
+      state.currentPage = 1;
+    },
+    setHasMore: (state, action) => {
+      state.hasMore = action.payload;
+    },
+    setFavoriteIds: (state, action) => {
+      state.favoriteIds = action.payload;
     },
     addFavoriteId: (state, action) => {
       const id = action.payload;
       if (!state.favoriteIds.includes(id)) {
         state.favoriteIds.push(id);
-        // Optionally save to localStorage here if needed
       }
     },
     removeFavoriteId: (state, action) => {
       const id = action.payload;
-      state.favoriteIds = state.favoriteIds.filter(favId => favId !== id);
-      // Optionally save to localStorage here if needed
+      state.favoriteIds = state.favoriteIds.filter(favoriteId => favoriteId !== id);
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchPsychologists.pending, state => {
+      .addCase(fetchAllPsychologists.pending, state => {
         state.status = 'loading';
       })
-      .addCase(fetchPsychologists.fulfilled, (state, action) => {
+      .addCase(fetchAllPsychologists.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.data = action.payload.psychologists;
+        state.totalPsychologistsCount = action.payload.totalCount;
+        state.hasMore = state.data.length < state.totalPsychologistsCount;
       })
-      .addCase(fetchPsychologists.rejected, (state, action) => {
+      .addCase(fetchAllPsychologists.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(fetchUserFavorites.fulfilled, (state, action) => {
+        state.favoriteIds = action.payload;
+      })
+      .addCase(fetchUserFavorites.rejected, (state, action) => {
+        console.error('Error fetching user favorites:', action.payload);
+      })
+      .addCase(addFavoritesPsychologists.fulfilled, (state, action) => {
+        state.favoriteIds.push(action.payload);
+      })
+      .addCase(removeFavoritePsychologist.fulfilled, (state, action) => {
+        state.favoriteIds = state.favoriteIds.filter(id => id !== action.payload);
       });
   },
 });
 
-export const { setPage, setTotalPages, resetState, setFilter, addFavoriteId, removeFavoriteId } =
-  psychologistsSlice.actions;
-
-export const { setPsychologists } = psychologistsSlice.actions;
+export const {
+  setPage,
+  setFilter,
+  setSortType,
+  setHasMore,
+  addFavoriteId,
+  removeFavoriteId,
+  setItemsPerPage,
+  setFavoriteIds,
+} = psychologistsSlice.actions;
 
 export default psychologistsSlice.reducer;

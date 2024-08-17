@@ -1,13 +1,11 @@
 @import '../../index.css';
 
-/* Base styles for mobile-first approach */
 .psychologist_container {
   margin: 0 auto;
   max-width: 1184px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
   align-items: center;
 }
 .psychologist_list {
@@ -17,6 +15,7 @@
 
   display: flex;
   flex-direction: column;
+  gap: 32px;
 
   width: 100%;
   max-width: 1184px;
@@ -35,8 +34,8 @@ h2 {
 }
 .psychologist_card {
   position: relative;
-  /* width: 100%;
-  height: 100%; */
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,12 +102,16 @@ h2 {
   position: relative;
   display: flex;
   justify-content: center;
-  gap: 4px;
+  /* gap: 4px; */
 }
-.icon_favorite {
+/* .icon_favorite {
   display: flex;
   align-items: center;
   padding-left: 20px;
+} */
+
+.block_rating_price_favorite > span {
+  display: none;
 }
 
 .star_rating {
@@ -118,6 +121,7 @@ h2 {
 
 .rating_text {
   margin-left: 8px;
+  padding-right: 8px;
   font-size: 14px;
   color: var(--color-light-grey-text);
 }
@@ -143,7 +147,9 @@ h2 {
   padding: 0;
   font-family: var(--font-inter-medium);
   font-weight: 500;
-  font-size: 16px;
+  /* font-size: 16px; */
+  font-size: 14px;
+
   line-height: 24px;
   color: #191a15;
 }
@@ -155,7 +161,9 @@ h2 {
   cursor: pointer;
   color: var(--color-text-green);
 }
-
+.pre_title {
+  margin-bottom: 8px;
+}
 .name_titile {
   font-family: 'Inter';
   font-style: normal;
@@ -165,6 +173,8 @@ h2 {
   display: flex;
   align-items: center;
   color: var(--color-text);
+
+  margin-bottom: 24px;
 }
 
 /* favorites */
@@ -225,10 +235,6 @@ h2 {
 .favorite.active i {
   color: var(--color-favorite-active);
 }
-
-/* .psychologist_about:after {
-  content: ' ...';
-} */
 
 .truncated_title {
   white-space: nowrap;
@@ -310,40 +316,72 @@ h2 {
   background: none;
   cursor: pointer;
 }
-.btn_load_more {
+.btn_appointment {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 14px 48px;
 
-  width: 176px;
+  width: 227px;
   height: 48px;
 
   background: #54be96;
   border-radius: 30px;
-  margin-bottom: 100px;
+
+  /* Make an appointment */
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25em;
+  letter-spacing: -0.01em;
+  color: #fbfbfb;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn_appointment:hover,
+.btn_appointment:active {
+  background: var(--color-green-hover);
 }
 /* container reviewer */
-.conttainer_avatarCircle_name_stars {
+.review_container {
   display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+.review_container_item {
+  display: flex;
+  flex-direction: column;
+}
+.review_container_item_name_stars {
+  display: flex;
+  flex-direction: row;
+
   align-items: center;
   margin-bottom: 16px;
   gap: 16px;
 }
 
 .avatarCircle {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 100px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
-  background: var(--color-light-grey);
+  /* background: var(--color-light-grey); */
+  background: rgba(84, 190, 150, 0.2);
   border-radius: 60px;
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 30px;
-  color: var(--color-avatar-text);
+  /* M */
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1em;
+  color: #54be96;
 }
 
 .reviewer_name_stars {
@@ -351,17 +389,24 @@ h2 {
   flex-direction: row;
 }
 
-.container_avatar_stars {
-  display: flex;
+.star_rating {
+  gap: 8px;
 }
 
-.container_name_stars {
+.name {
   display: flex;
-  flex-direction: column;
   margin: 8px 0;
 }
-
-/* Tablet styles */
+.review_container_item_comment {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25em;
+  display: flex;
+  align-items: center;
+  color: rgba(25, 26, 21, 0.5);
+}
 @media (min-width: 768px) {
   .psychologist_list {
     display: flex;
@@ -372,7 +417,7 @@ h2 {
     padding: 24px;
     flex-direction: row;
     align-items: flex-start;
-    max-width: 800px;
+    /* max-width: 800px; */
     width: 100%;
     height: 100%;
   }
@@ -391,7 +436,6 @@ h2 {
     display: flex;
     align-items: center;
     padding-left: 20px;
-    /* padding-left: 28px; */
   }
 
   .icon_favorite {
@@ -439,7 +483,7 @@ h2 {
   }
 
   .psychologist_card {
-    max-width: 1200px;
+    /* max-width: 1200px; */
   }
 
   .psychologist_image {
