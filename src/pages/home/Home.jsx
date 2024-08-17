@@ -2,6 +2,10 @@ import css from './style.module.css';
 import sprite from '../../assets/sprite.svg';
 import titleImg from '../../assets/images/image3x.jpg';
 
+const handleRedirect = () => {
+  window.location.href = '/psychologists';
+};
+
 const Home = () => {
   return (
     <div className={css.home_page}>
@@ -15,7 +19,7 @@ const Home = () => {
             We help you to reveal your potential, overcome challenges and find a guide in your own
             life with the help of our experienced psychologists.
           </p>
-          <button className={css.btn_started}>
+          <button className={css.btn_started} onClick={handleRedirect}>
             Get started
             <svg className={css.icon_arrow}>
               <use href={`${sprite}#icon-arrow16`}></use>
